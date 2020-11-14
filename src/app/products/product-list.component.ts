@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
     ]
 })
 export class ProductListComponent {
-    pageTitle: string = 'Product List';
+    pageTitle: string = 'Products List';
     products: any[] = [
         {
             "productId": 1,
