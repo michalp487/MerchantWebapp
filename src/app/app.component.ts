@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Merchant WebApp';
+  pageTitle = 'Merchant WebApp';
+  version: number = 6;
 }
