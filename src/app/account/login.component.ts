@@ -25,7 +25,7 @@ export class LoginComponent {
 
         this._merchantApiService.login(this.emailInput, this.passwordInput).subscribe({
             next: response => {
-                alert('User logged in.');
+                console.log('User logged in.');
                 this._router.navigate(['/products']);
             },
             error: err => this.errorMessage = err

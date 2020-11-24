@@ -21,7 +21,15 @@ export class AppComponent {
     return this.user && this.user.role === Role.Admin;
   }
 
+  get isCustomer() {
+    return this.user && this.user.role === Role.Customer;
+  }
+
   get isAuthenticated() {
     return this.user && this.user.token;
+  }
+
+  logout() {
+    this._merchantApiService.logout();
   }
 }

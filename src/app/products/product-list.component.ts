@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IProduct } from './product';
 import { MerchantApiService } from '../../api/merchantApi/merchant-api.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
     selector: 'pm-products',

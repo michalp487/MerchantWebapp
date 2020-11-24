@@ -25,7 +25,7 @@ export class RegisterComponent {
 
         this._merchantApiService.register(this.emailInput, this.passwordInput).subscribe({
             next: response => {
-                alert('User registered.');
+                console.log('User registered.');
                 this._router.navigate(['/products']);
             },
             error: err => this.errorMessage = err

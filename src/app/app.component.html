@@ -2,10 +2,11 @@
   <a class='navbar-brand'>{{pageTitle}}</a>
   <ul class='nav nav-pills'>
     <li *ngIf="!isAuthenticated"><a class='nav-link' routerLinkActive='active' [routerLink]="['/login']">Login</a></li>
-    <li *ngIf="isAuthenticated"><a class='nav-link' routerLinkActive='active' [routerLink]="['/register']">Register</a></li>
-    <li><a class='nav-link' routerLinkActive='active' [routerLink]="['/products']">Product List</a></li>
-    <li><a class='nav-link' routerLinkActive='active' [routerLink]="['/addproduct']">Add Products</a></li>
-    <li><a class='nav-link' routerLinkActive='active' [routerLink]="['/basket']">Basket</a></li>
+    <li *ngIf="isAuthenticated"><a class='nav-link' routerLinkActive='active' [routerLink]="['/welcome']" (click)="logout()">Logout</a></li>
+    <li *ngIf="!isAuthenticated"><a class='nav-link' routerLinkActive='active' [routerLink]="['/register']">Register</a></li>
+    <li *ngIf="isAuthenticated"><a class='nav-link' routerLinkActive='active' [routerLink]="['/products']">Product List</a></li>
+    <li *ngIf="isAdmin"><a class='nav-link' routerLinkActive='active' [routerLink]="['/addproduct']">Add Products</a></li>
+    <li *ngIf="isCustomer"><a class='nav-link' routerLinkActive='active' [routerLink]="['/basket']">Basket</a></li>
   </ul>
 </nav>
 <div class='container'>

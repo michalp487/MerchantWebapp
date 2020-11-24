@@ -36,6 +36,7 @@ import { JwtInterceptor } from '../api/merchantApi/jwt-interceptor';
       { path: 'register', component: RegisterComponent},
       { path: 'login', component: LoginComponent},
       { path: 'addproduct', component: AddProductComponent},
+      { path: 'basket', component: BasketComponent},
       { path: '', redirectTo: 'welcome', pathMatch: 'full'},
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
       //{ path: '**', component: PageNotFoundComponent},

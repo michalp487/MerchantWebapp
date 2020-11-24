@@ -87,8 +87,11 @@ export class MerchantApiService {
 
     logout() {
         // remove user from local storage to log user out
+        this._httpClient.post(this.apiBaseUrl + 'account/logout', {}).subscribe();
+
         localStorage.removeItem('user');
         this.userSubject.next(null);
+
         this._router.navigate(['/login']);
     }
 
