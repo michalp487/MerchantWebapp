@@ -1,0 +1,28 @@
+<div class="card">
+    <div class="card-header">
+      {{pageTitle}}
+    </div>
+    <div class="card-body">
+      <div class="container-fluid">
+  
+        <div class="container">
+            <h1>Add Product</h1>
+            <p>Please fill in this form to add product.</p>
+            <hr>
+        
+            <label for="productname"><b>Product Name</b></label>
+            <input type="text" placeholder="Enter Product Name" [(ngModel)]="productNameInput"  required>
+            <br />
+        
+            <label for="psw"><b>Price</b></label>
+            <input type="number" placeholder="Enter Price (format 2.000)" [(ngModel)]="priceInput" required>
+            <br /><br />
+        
+            <button type="submit" (click)="onAddProductClicked()">Add Product</button>
+        
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  

@@ -4,17 +4,42 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { WelcomeComponent } from './home/welcome.component';
+import { RouterModule } from '@angular/router';
+import { RegisterComponent } from './account/register.component';
+import { LoginComponent } from './account/login.component';
+import { AddProductComponent } from './products/add-product.component';
+import { BasketComponent } from './basket/basket.component';
+import { JwtInterceptor } from '../api/merchantApi/jwt-interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductListComponent
+    ProductListComponent,
+    WelcomeComponent,
+    RegisterComponent,
+    LoginComponent,
+    AddProductComponent,
+    BasketComponent
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      { path: 'products', component: ProductListComponent},
+      { path: 'welcome', component: WelcomeComponent},
+      { path: 'register', component: RegisterComponent},
+      { path: 'login', component: LoginComponent},
+      { path: 'addproduct', component: AddProductComponent},
+      { path: '', redirectTo: 'welcome', pathMatch: 'full'},
+      { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
+      //{ path: '**', component: PageNotFoundComponent},
+    ])
   ],
   bootstrap: [AppComponent]
 })
