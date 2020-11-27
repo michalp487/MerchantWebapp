@@ -15,8 +15,6 @@ export class ProductListComponent implements OnInit {
         
     }
 
-    clickedProductId: string;
-
     pageTitle: string = 'Products List';
     errorMessage:string;
     products: IProduct[];
@@ -34,8 +32,14 @@ export class ProductListComponent implements OnInit {
         });
     }
 
-    onAnchorClicked(message: string): void{
-        console.log('Anchor clicked' + message);
-        console.log(this.clickedProductId);
+    onAnchorClicked(productId: string): void{
+        console.log('Anchor clicked' + productId);
+        this._merchantApiService.addToBasket(productId).subscribe({
+            next: response => {
+                var cos = '';
+            },
+            error: err => this.errorMessage = err
+        })
+        console.log(productId);
     }
 }

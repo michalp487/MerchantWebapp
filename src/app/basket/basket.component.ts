@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MerchantApiService } from 'src/api/merchantApi/merchant-api.service';
-import { IProduct } from '../products/product';
+import { IBasketItem } from './basket-item';
+import { IBasketItemResponse } from './basket-response';
 
 @Component({
   selector: 'pm-basket',
@@ -9,32 +11,51 @@ import { IProduct } from '../products/product';
 })
 export class BasketComponent implements OnInit {
 
-  constructor(private _merchantApiService : MerchantApiService){
+  constructor(private _merchantApiService : MerchantApiService, private _router: Router){
         
   }
 
   clickedProductId: string;
 
-  pageTitle: string = 'Products List';
+  pageTitle: string = 'Basket items';
   errorMessage:string;
-  products: IProduct[];
-  filteredProducts: IProduct[];
+  basketItemResponse: IBasketItemResponse;
 
 
   ngOnInit(): void {
       var cos = '';
-      this._merchantApiService.getProducts().subscribe({
+      this._merchantApiService.getBasket().subscribe({
           next: response => {
-              this.products = response.data;
-              this.filteredProducts = this.products;
+              this.basketItemResponse = response.data;
           },
           error: err => this.errorMessage = err
       });
   }
 
-  onAnchorClicked(message: string): void{
-      console.log('Anchor clicked' + message);
+  onAnchorClicked(basketItemId: string): void{
+      console.log('Anchor clicked' + basketItemId);
+
+      this._merchantApiService.removeFromBasket(basketItemId).subscribe({
+        next: response => {
+            var cos = '';
+            this.ngOnInit();
+        },
+        error: err => this.errorMessage = err
+      })
+
       console.log(this.clickedProductId);
+  }
+
+  onBasketCheckoutClicked(): void {
+    console.log('Checkout');
+
+    this._merchantApiService.checkoutBasket().subscribe({
+      next: response => {
+          var cos = '';
+          this._router.navigate(['welcome']);
+      },
+      error: err => this.errorMessage = err
+    })
   }
 
 }

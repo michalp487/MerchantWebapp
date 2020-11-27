@@ -12,6 +12,7 @@ import { LoginComponent } from './account/login.component';
 import { AddProductComponent } from './products/add-product.component';
 import { BasketComponent } from './basket/basket.component';
 import { JwtInterceptor } from '../api/merchantApi/jwt-interceptor';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { JwtInterceptor } from '../api/merchantApi/jwt-interceptor';
     RegisterComponent,
     LoginComponent,
     AddProductComponent,
-    BasketComponent
+    BasketComponent,
+    OrderComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
