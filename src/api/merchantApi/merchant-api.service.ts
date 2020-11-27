@@ -8,6 +8,7 @@ import { User } from './user';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
 import { IBasketItemResponse } from '../../app/basket/basket-response';
+import { IOrder } from '../../app/order/order';
 
 @Injectable({
     providedIn: 'root'
@@ -85,6 +86,24 @@ export class MerchantApiService {
         this.userSubject.next(null);
 
         this._router.navigate(['/login']);
+    }
+
+    getOrders(): Observable<ApiResponse<IOrder[]>> {
+        var response = this._httpClient.get<ApiResponse<IOrder[]>>(this.apiBaseUrl + 'order/all').pipe(
+            tap(data => console.log('Receive JSON: ' + JSON.stringify(data))),
+            catchError(this.handleError)
+        );
+        
+        return response;
+    }
+
+    getCurrentUserOrders(): Observable<ApiResponse<IOrder[]>> {
+        var response = this._httpClient.get<ApiResponse<IOrder[]>>(this.apiBaseUrl + 'order').pipe(
+            tap(data => console.log('Receive JSON: ' + JSON.stringify(data))),
+            catchError(this.handleError)
+        );
+        
+        return response;
     }
 
     getProducts(): Observable<ApiResponse<IProduct[]>> {

@@ -13,6 +13,7 @@ import { AddProductComponent } from './products/add-product.component';
 import { BasketComponent } from './basket/basket.component';
 import { JwtInterceptor } from '../api/merchantApi/jwt-interceptor';
 import { OrderComponent } from './order/order.component';
+import { MyOrderComponent } from './my-order/my-order.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { OrderComponent } from './order/order.component';
     LoginComponent,
     AddProductComponent,
     BasketComponent,
-    OrderComponent
+    OrderComponent,
+    MyOrderComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -39,6 +41,8 @@ import { OrderComponent } from './order/order.component';
       { path: 'login', component: LoginComponent},
       { path: 'addproduct', component: AddProductComponent},
       { path: 'basket', component: BasketComponent},
+      { path: 'orders', component: OrderComponent},
+      { path: 'myorders', component: MyOrderComponent},
       { path: '', redirectTo: 'welcome', pathMatch: 'full'},
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
       //{ path: '**', component: PageNotFoundComponent},

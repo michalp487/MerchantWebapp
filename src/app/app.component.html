@@ -7,6 +7,8 @@
     <li *ngIf="isAuthenticated"><a class='nav-link' routerLinkActive='active' [routerLink]="['/products']">Product List</a></li>
     <li *ngIf="isAdmin"><a class='nav-link' routerLinkActive='active' [routerLink]="['/addproduct']">Add Products</a></li>
     <li *ngIf="isCustomer"><a class='nav-link' routerLinkActive='active' [routerLink]="['/basket']">Basket</a></li>
+    <li *ngIf="isAdmin"><a class='nav-link' routerLinkActive='active' [routerLink]="['/orders']">Orders</a></li>
+    <li *ngIf="isCustomer"><a class='nav-link' routerLinkActive='active' [routerLink]="['/myorders']">My Orders</a></li>
   </ul>
 </nav>
 <div class='container'>

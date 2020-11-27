@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { MerchantApiService } from '../../api/merchantApi/merchant-api.service';
-import { IOrder } from './order';
+import { IOrder } from '../order/order';
 
 @Component({
-  selector: 'pm-order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.css']
+  selector: 'pm-my-order',
+  templateUrl: './my-order.component.html',
+  styleUrls: ['./my-order.component.css']
 })
-export class OrderComponent implements OnInit {
+export class MyOrderComponent implements OnInit {
 
   constructor(private _merchantApiService: MerchantApiService) { }
 
-  pageTitle: string = 'Orders';
+  pageTitle: string = 'My Orders';
   errorMessage:string;
   orders: IOrder[];
 
 
   ngOnInit(): void {
       var cos = '';
-      this._merchantApiService.getOrders().subscribe({
+      this._merchantApiService.getCurrentUserOrders().subscribe({
           next: response => {
               this.orders = response.data;
           },

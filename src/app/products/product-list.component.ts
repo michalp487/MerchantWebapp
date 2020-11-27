@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IProduct } from './product';
 import { MerchantApiService } from '../../api/merchantApi/merchant-api.service';
+import { User } from '../../api/merchantApi/user';
+import { Role } from 'src/api/merchantApi/role';
 
 @Component({
     selector: 'pm-products',
@@ -12,14 +14,14 @@ import { MerchantApiService } from '../../api/merchantApi/merchant-api.service';
 export class ProductListComponent implements OnInit {
 
     constructor(private _merchantApiService : MerchantApiService){
-        
+        this._merchantApiService.user.subscribe(x => this.user = x);
     }
 
     pageTitle: string = 'Products List';
     errorMessage:string;
     products: IProduct[];
     filteredProducts: IProduct[];
-
+    user: User;
 
     ngOnInit(): void {
         var cos = '';
@@ -42,4 +44,8 @@ export class ProductListComponent implements OnInit {
         })
         console.log(productId);
     }
+
+    get isCustomer() {
+        return this.user && this.user.role === Role.Customer;
+      }
 }

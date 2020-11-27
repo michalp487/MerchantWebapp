@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MerchantApiService } from 'src/api/merchantApi/merchant-api.service';
-import { IBasketItem } from './basket-item';
 import { IBasketItemResponse } from './basket-response';
 
 @Component({
@@ -14,8 +13,6 @@ export class BasketComponent implements OnInit {
   constructor(private _merchantApiService : MerchantApiService, private _router: Router){
         
   }
-
-  clickedProductId: string;
 
   pageTitle: string = 'Basket items';
   errorMessage:string;
@@ -37,13 +34,10 @@ export class BasketComponent implements OnInit {
 
       this._merchantApiService.removeFromBasket(basketItemId).subscribe({
         next: response => {
-            var cos = '';
             this.ngOnInit();
         },
         error: err => this.errorMessage = err
       })
-
-      console.log(this.clickedProductId);
   }
 
   onBasketCheckoutClicked(): void {
@@ -52,7 +46,7 @@ export class BasketComponent implements OnInit {
     this._merchantApiService.checkoutBasket().subscribe({
       next: response => {
           var cos = '';
-          this._router.navigate(['welcome']);
+          this._router.navigate(['myorders']);
       },
       error: err => this.errorMessage = err
     })

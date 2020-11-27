@@ -1,6 +1,6 @@
 <div class='card'>
     <div class='card-header'>
-        Orders
+        My Orders
     </div>
 
     <div class='card-body'>
@@ -12,7 +12,7 @@
                 <th>Name</th>
                 <th>Status</th>
                 <th>Amount</th>
-                <th>Manage</th>
+                <th>Payment</th>
               </tr>
             </thead>
             <tbody>
@@ -28,7 +28,7 @@
 
                 <td>{{ order.price | currency:'EUR':'symbol':'1.2-2' }}</td>
                 <td>
-                  <a [routerLink]="" [clickedBasketItemId]="order.id" (click)="onAnchorClicked(order.id)">Manage</a> 
+                  <a [routerLink]="" [clickedBasketItemId]="order.id" (click)="onAnchorClicked(order.id)">Make payment</a> 
                 </td>
               </tr>
             </tbody>

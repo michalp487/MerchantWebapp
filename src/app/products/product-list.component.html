@@ -34,7 +34,7 @@
                 <!-- <th>Code</th>
                 <th>Available</th> -->
                 <th>Price</th>
-                <th>Add to basket</th>
+                <th *ngIf="isCustomer">Add to basket</th>
               </tr>
             </thead>
             <tbody>
@@ -52,7 +52,7 @@
                 <!-- <td>{{ product.productCode | lowercase | convertToSpaces:'-' }}</td>
                 <td>{{ product.releaseDate }}</td> -->
                 <td>{{ product.price | currency:'EUR':'symbol':'1.2-2' }}</td>
-                <td>
+                <td *ngIf="isCustomer">
                   <a [routerLink]="" [clickedProductId]="product.id" (click)="onAnchorClicked(product.id)">Add to Basket</a> 
 
                     <!-- <a [routerLink]="['/products', product.productId]">
