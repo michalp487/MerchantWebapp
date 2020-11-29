@@ -17,7 +17,6 @@ export class OrderComponent implements OnInit {
 
 
   ngOnInit(): void {
-      var cos = '';
       this._merchantApiService.getOrders().subscribe({
           next: response => {
               this.orders = response.data;

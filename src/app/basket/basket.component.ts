@@ -20,7 +20,6 @@ export class BasketComponent implements OnInit {
 
 
   ngOnInit(): void {
-      var cos = '';
       this._merchantApiService.getBasket().subscribe({
           next: response => {
               this.basketItemResponse = response.data;
@@ -45,7 +44,6 @@ export class BasketComponent implements OnInit {
 
     this._merchantApiService.checkoutBasket().subscribe({
       next: response => {
-          var cos = '';
           this._router.navigate(['myorders']);
       },
       error: err => this.errorMessage = err

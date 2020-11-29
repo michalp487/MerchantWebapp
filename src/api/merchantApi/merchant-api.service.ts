@@ -21,7 +21,6 @@ export class MerchantApiService {
     public user: Observable<User>;
 
     constructor(private _httpClient: HttpClient, private _router: Router){
-        // Move to ngInit?
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
     }
@@ -30,10 +29,6 @@ export class MerchantApiService {
         var cos = '';
         var response = this._httpClient.post<ApiResponse<string>>(this.apiBaseUrl + 'account/register', { username, password })
             .pipe(map(response => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                //localStorage.setItem('user', JSON.stringify(user));
-                //this.userSubject.next(user);
-
                 this.login(username, password).subscribe({
                     next: response => {
                         console.log('Logged in.')
@@ -56,8 +51,6 @@ export class MerchantApiService {
         var response = this._httpClient.post<ApiResponse<string>>(this.apiBaseUrl + 'account/login', { username, password })
             .pipe(map(response => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                // localStorage.setItem('user', JSON.stringify(user));
-                // this.userSubject.next(user);
 
                 var tokenDecoded = jwt_decode(response.data);
 
@@ -79,7 +72,6 @@ export class MerchantApiService {
     }
 
     logout() {
-        // remove user from local storage to log user out
         this._httpClient.post(this.apiBaseUrl + 'account/logout', {}).subscribe();
 
         localStorage.removeItem('user');
@@ -90,7 +82,7 @@ export class MerchantApiService {
 
     getOrders(): Observable<ApiResponse<IOrder[]>> {
         var response = this._httpClient.get<ApiResponse<IOrder[]>>(this.apiBaseUrl + 'order/all').pipe(
-            tap(data => console.log('Receive JSON: ' + JSON.stringify(data))),
+            tap(data => console.log('Received JSON: ' + JSON.stringify(data))),
             catchError(this.handleError)
         );
         
@@ -99,7 +91,7 @@ export class MerchantApiService {
 
     getCurrentUserOrders(): Observable<ApiResponse<IOrder[]>> {
         var response = this._httpClient.get<ApiResponse<IOrder[]>>(this.apiBaseUrl + 'order').pipe(
-            tap(data => console.log('Receive JSON: ' + JSON.stringify(data))),
+            tap(data => console.log('Received JSON: ' + JSON.stringify(data))),
             catchError(this.handleError)
         );
         
@@ -108,7 +100,7 @@ export class MerchantApiService {
 
     getProducts(): Observable<ApiResponse<IProduct[]>> {
         var response = this._httpClient.get<ApiResponse<IProduct[]>>(this.apiBaseUrl + 'product/all').pipe(
-            tap(data => console.log('Receive JSON: ' + JSON.stringify(data))),
+            tap(data => console.log('Received JSON: ' + JSON.stringify(data))),
             catchError(this.handleError)
         );
         
@@ -116,7 +108,6 @@ export class MerchantApiService {
     }
 
     addProduct(name: string, price: number): Observable<ApiResponse<string>> {
-        var cos = '';
         var response = this._httpClient.post<ApiResponse<string>>(this.apiBaseUrl + 'product', { name, price })
             .pipe(map(response => {
                 console.log('Product added.');
@@ -129,7 +120,6 @@ export class MerchantApiService {
     }
 
     removeProduct(productId: string): Observable<ApiResponse<string>> {
-        var cos = '';
         var response = this._httpClient.delete<ApiResponse<string>>(this.apiBaseUrl + 'product?productId=' + productId)
             .pipe(map(response => {
                 console.log('Product removed.');
@@ -142,7 +132,6 @@ export class MerchantApiService {
     }
 
     addToBasket(productId: string): Observable<ApiResponse<string>> {
-        var cos = '';
         var response = this._httpClient.post<ApiResponse<string>>(this.apiBaseUrl + 'basket', { productId })
             .pipe(map(response => {
                 console.log('Product added to basket.');
@@ -155,7 +144,6 @@ export class MerchantApiService {
     }
 
     removeFromBasket(basketItemId: string): Observable<ApiResponse<string>> {
-        var cos = '';
         var response = this._httpClient.delete<ApiResponse<string>>(this.apiBaseUrl + 'basket?basketItemId=' + basketItemId)
             .pipe(map(response => {
                 console.log('Basket item removed.');
@@ -169,7 +157,7 @@ export class MerchantApiService {
 
     getBasket(): Observable<ApiResponse<IBasketItemResponse>> {
         var response = this._httpClient.get<ApiResponse<IBasketItemResponse>>(this.apiBaseUrl + 'basket').pipe(
-            tap(data => console.log('Receive JSON basket: ' + JSON.stringify(data))),
+            tap(data => console.log('Received JSON basket: ' + JSON.stringify(data))),
             catchError(this.handleError)
         );
         
@@ -178,7 +166,7 @@ export class MerchantApiService {
 
     checkoutBasket(): Observable<ApiResponse<boolean>> {
         var response = this._httpClient.post<ApiResponse<boolean>>(this.apiBaseUrl + 'basket/checkout', {}).pipe(
-            tap(data => console.log('Receive JSON basket: ' + JSON.stringify(data))),
+            tap(data => console.log('Received JSON basket: ' + JSON.stringify(data))),
             catchError(this.handleError)
         );
         

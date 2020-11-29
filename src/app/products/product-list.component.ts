@@ -24,7 +24,6 @@ export class ProductListComponent implements OnInit {
     user: User;
 
     ngOnInit(): void {
-        var cos = '';
         this._merchantApiService.getProducts().subscribe({
             next: response => {
                 this.products = response.data;
@@ -38,7 +37,7 @@ export class ProductListComponent implements OnInit {
         console.log('Anchor clicked' + productId);
         this._merchantApiService.addToBasket(productId).subscribe({
             next: response => {
-                var cos = '';
+                
             },
             error: err => this.errorMessage = err
         })
